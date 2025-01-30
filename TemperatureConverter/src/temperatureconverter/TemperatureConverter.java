@@ -13,31 +13,31 @@ import java.util.Scanner;
 public class TemperatureConverter {
 
     static void computeTempInDegrees() {
-        double fahrenheit;
+        double tempinput;
         
         Scanner scanner = new Scanner(System.in);
         
         System.out.print("Enter the temperature in Fahrenheit: ");
-        fahrenheit = scanner.nextDouble();
+        tempinput = scanner.nextDouble();
         
-        double celsius = (5.0 / 9.0) * (fahrenheit - 32);
+        double celsius = (5.0 / 9.0) * (tempinput - 32);
         
-        System.out.println(fahrenheit + " degrees Fahrenheit is " + String.format("%.2f", celsius) + " degrees Celsius");
+        System.out.println(tempinput + " degrees Fahrenheit is " + String.format("%.2f", celsius) + " degrees Celsius");
         
         scanner.close();
     }
     
     static void computeTempInFahrenheit() {
-        double celsius;
+        double tempinput;
         
         Scanner scanner = new Scanner(System.in);
         
         System.out.print("Enter the temperature in Celsius: ");
-        celsius = scanner.nextDouble();
+        tempinput = scanner.nextDouble();
         
-        double fahrenheit = (9.0 / 5.0) * celsius + 32;
+        double fahrenheit = (9.0 / 5.0) * tempinput + 32;
         
-        System.out.println(celsius + " degrees Celsius is " + String.format("%.2f", fahrenheit) + " degrees Fahrenheit");
+        System.out.println(tempinput + " degrees Celsius is " + String.format("%.2f", fahrenheit) + " degrees Fahrenheit");
         
         scanner.close();
     }

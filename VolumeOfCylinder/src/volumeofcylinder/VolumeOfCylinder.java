@@ -22,7 +22,7 @@ public class VolumeOfCylinder {
         System.out.print("Enter the height of the cylinder: ");
         height = dimensions.nextInt();
         
-        double volume = PI * (radius * radius) * height;
+        double volume = PI * Math.sqrt(radius) * height;
         
         String formattedVolume = String.format("%.2f", volume);
         
@@ -35,7 +35,6 @@ public class VolumeOfCylinder {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
          volume();
     }
     
