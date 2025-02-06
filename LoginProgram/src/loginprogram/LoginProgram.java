@@ -5,44 +5,67 @@
  * 
  */
 
-package loginprogram;
-import java.io.Console;
+import java.io.Console;  // Import the Console to display input dialog in the terminal
+import java.util.Scanner;  // Import the Scanner class for reading user input
 
 public class LoginProgram {
-    public static void main(String[] args) {
-        // Predefined username and password for demonstration
-        String correctUsername = "user123";
-        String correctPassword = "pass123";
 
-        // Create a Console object to read user input securely
-        Console console = System.console();
-        
-        // Check if console is available (it may not be in some IDEs)
-        if (console == null) {
-            System.out.println("No console available. Please run this program in a terminal.");
-            return;
-        }
+    private String username = "isaac";  // Define the default username
+    private String password = "BSE-01-0084/2025";  // Define the default password
+    private int loginAttempts = 0;  // Initialize the number of login attempts
+    private final int MAX_ATTEMPTS = 3;  // Define the maximum number of login attempts
 
-        int attempts = 0; // Number of attempts made
+    public void login() {
+        Scanner scanner = new Scanner(System.in);  // Create a Scanner object for reading input
 
-        while (attempts < 3) { // Allow up to 3 attempts
-            // Prompt for username
-            String username = console.readLine("Enter your username: ");
-            
-            // Prompt for password and mask input with *
-            char[] passwordArray = console.readPassword("Enter your password: ");
-            String password = new String(passwordArray); // Convert char array to String
-            
-            // Check if the entered credentials are correct
-            if (username.equals(correctUsername) && password.equals(correctPassword)) {
-                System.out.println("Login successful!"); // Successful login message
-                return; // Exit the program on successful login
+        while (loginAttempts < MAX_ATTEMPTS) {  // Loop until the maximum number of attempts is reached
+            System.out.print("Enter username: ");  // Prompt the user to enter their username
+            String myUsername = scanner.nextLine();  // Read the username entered by the user
+            System.out.print("Enter password: ");  // Prompt the user to enter their password
+            String myPassword = getPassword(scanner);  // Call the getPassword method to read the password securely
+
+            if (myUsername.equals(username) && myPassword.equals(password)) {  // Check if the entered username and password match the default values
+                System.out.println("Login successful!");  // Print a success message if the login is successful
+                scanner.close();  // Close the scanner
+                return;  // Exit the login method
             } else {
-                System.out.println("Incorrect username or password. Please try again."); // Error message
-                attempts++; // Increment the attempt counter
+                System.out.println("Login failed.");  // Print a failure message if the login fails
+                loginAttempts++;  // Increment the number of login attempts
             }
         }
 
-        System.out.println("Too many failed attempts. Access denied."); // Deny access after 3 failed attempts
+        System.out.println("Maximum login attempts reached.");  // Print a message if the maximum number of attempts is reached
+        scanner.close();  // Close the scanner
+    }
+
+    private String getPassword(Scanner scanner) {
+        Console console = System.console();  // Get the system console
+        if (console != null) {  // Check if the console is available (e.g., running in a terminal)
+            char[] passwordArray = console.readPassword();  // Read the password from the console without echoing it
+            if (passwordArray != null) {  // Check if the password array is not null
+                return new String(passwordArray);  // Convert the password array to a String and return it
+            } else {
+                return "";  // Handle potential null case by returning an empty string
+            }
+        } else {  // If the console is not available (e.g., running in an IDE)
+            StringBuilder passwordBuilder = new StringBuilder();  // Create a StringBuilder to build the password
+            Scanner lineScanner = new Scanner(System.in);  // Use a separate scanner for reading lines
+
+            String input = lineScanner.nextLine();  // Read the whole line at once
+
+            for (int i = 0; i < input.length(); i++) {  // Loop through each character in the input
+                passwordBuilder.append(input.charAt(i));  // Append the character to the password builder
+                System.out.print("*");  // Print an asterisk for each character
+            }
+            System.out.println();  // Move to the next line after password entry
+            return passwordBuilder.toString();  // Convert the password builder to a String and return it
+        }
+    }
+
+
+    public static void main(String[] args) {
+        new LoginProgram().login();  // Create a new LoginProgram object and call the login method
     }
 }
+
+
