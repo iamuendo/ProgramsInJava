@@ -1,7 +1,7 @@
 /**
  * 
  * @author: Muendo Isaac Maingi
- * Admission Number: BSE-01-0084/2025
+ * Admission Number: BSE-01-0024/2025
  * 
  */
 
@@ -11,7 +11,7 @@ import java.util.Scanner;  // Import the Scanner class for reading user input
 public class LoginProgram {
 
     private String username = "isaac";  // Define the default username
-    private String password = "BSE-01-0084/2025";  // Define the default password
+    private String password = "BSE-01-0024/2025";  // Define the default password
     private int loginAttempts = 0;  // Initialize the number of login attempts
     private final int MAX_ATTEMPTS = 3;  // Define the maximum number of login attempts
 
@@ -53,7 +53,7 @@ public class LoginProgram {
 
             String input = lineScanner.nextLine();  // Read the whole line at once
 
-            for (int i = 0; i < input.length(); i++) {  // Loop through each character in the input
+            for (int i = 0; i <= input.length(); i++) {  // Loop through each character in the input
                 passwordBuilder.append(input.charAt(i));  // Append the character to the password builder
                 System.out.print("*");  // Print an asterisk for each character
             }

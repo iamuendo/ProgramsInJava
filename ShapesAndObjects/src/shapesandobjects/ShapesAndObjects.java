@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  *
  * @author: Muendo Isaac Maingi
- * Admission no: BSE-01-0084/2025
+ * Admission no: BSE-01-0024/2025
  * Using Reference Variables
  */
 public class ShapesAndObjects {
