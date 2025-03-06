@@ -146,7 +146,7 @@ public class Pet extends javax.swing.JFrame {
                         .addComponent(rabbitBtn)
                         .addGap(18, 18, 18)
                         .addComponent(pigBtn)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
