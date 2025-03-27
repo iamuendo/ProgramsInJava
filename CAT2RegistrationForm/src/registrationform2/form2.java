@@ -31,6 +31,7 @@ public class form2 extends javax.swing.JFrame {
         tableModel = new DefaultTableModel(columns, 0);
         // Set the table model for the form2Tbl
         form2Tbl.setModel(tableModel);
+        loadDataFromDatabase();
     }
 
     @SuppressWarnings("unchecked")
@@ -210,6 +211,35 @@ public class form2 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    // Create a method to load data from the database and display on the table
+    private void loadDataFromDatabase() {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM form2")) {
+
+            // Clear the table before loading new data
+            tableModel.setRowCount(0);
+
+            // Iterate through the result set and add rows to the table model
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String name = rs.getString("name");
+                String gender = rs.getString("gender");
+                String contact = rs.getString("contact");
+                String address = rs.getString("address");
+
+                // Add the row to the table model
+                Object[] row = {id, name, gender, contact, address};
+                tableModel.addRow(row);
+            }
+        } catch (SQLException e) {
+            // Handle database errors
+            JOptionPane.showMessageDialog(this, "Error loading data from database: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     // Create a method to handle the register button click event
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         String id = idTxt.getText(); // Get the ID from the text field
